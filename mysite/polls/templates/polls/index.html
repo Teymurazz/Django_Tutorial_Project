@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting on the topic: choosing the best athletes in different sports in the world, regardless of time.</title>
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <style>
+       
+        body {
+            background-image: url("https://4brain.ru/blog/wp-content/uploads/2020/08/top-7-prichin-po-kotorym-sport-polezen-dlja-mozga.png"); /* Замените этот URL на актуальный URL изображения из интернета */
+            background-size: cover; 
+            background-position: center; 
+            font-size: 20px;
+            color: rgb(3, 5, 133);
+        }
+
+        li {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voting on the topic: choosing the best athletes in different sports in the world, regardless of time.</h1>
+    {% if latest_question_list %}
+        <ul>
+            {% for question in latest_question_list %}
+                <li>
+                    <a href="{% url 'polls:detail' question.pk %}">{{ question.question_text }}</a>
+                    {% if question.was_published_recently %}
+                        <span style="color: green;">(Published recently)</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+</body>
+</body>
+</html>
